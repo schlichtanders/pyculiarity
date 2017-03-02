@@ -15,7 +15,7 @@ Licensed under the GPLv3
 from setuptools import setup, find_packages
 
 setup(
-    name='pyculiarity',
+    name='pyculiarity3',
     version='0.0.2',
     description='A Python port of Twitter\'s AnomalyDetection R Package.',
     long_description=__doc__,
@@ -32,7 +32,7 @@ setup(
         'Programming Language :: Python :: 2.7',
     ],
     keywords='data anomaly detection pandas timeseries',
-    packages=['pyculiarity'],
+    packages=['pyculiarity3'],
     install_requires=['numpy', 'scipy', 'pandas', 'pytz',
                       'statsmodels', 'rpy2'],
     extras_require={
