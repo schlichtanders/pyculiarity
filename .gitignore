@@ -6,3 +6,5 @@ env*
 dist
 *.egg
 *.egg-info
+.idea
+*~
