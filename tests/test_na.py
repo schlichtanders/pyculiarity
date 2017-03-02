@@ -1,5 +1,5 @@
 from nose.tools import eq_, raises
-from pyculiarity import detect_ts, detect_vec
+from pyculiarity3 import detect_ts, detect_vec
 from unittest import TestCase
 import pandas as pd
 import os
