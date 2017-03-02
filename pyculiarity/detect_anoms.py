@@ -1,13 +1,14 @@
-from date_utils import format_timestamp
+from .date_utils import format_timestamp
 from itertools import groupby
 from math import trunc, sqrt
-from r_stl import stl
+from .r_stl import stl
 from scipy.stats import t as student_t
 from statsmodels.robust.scale import mad
 import numpy as np
 import pandas as ps
 import statsmodels.api as sm
 import sys
+from cytoolz import count
 
 def detect_anoms(data, k=0.49, alpha=0.05, num_obs_per_period=None,
                  use_decomp=True, one_tail=True,
@@ -43,7 +44,7 @@ def detect_anoms(data, k=0.49, alpha=0.05, num_obs_per_period=None,
     posix_timestamp = data.dtypes[0].type is np.datetime64
 
     # run length encode result of isnull, check for internal nulls
-    if (len(map(lambda x: x[0], list(groupby(ps.isnull(
+    if (count(map(lambda x: x[0], list(groupby(ps.isnull(
             ps.concat([ps.Series([np.nan]),
                        data.value,
                        ps.Series([np.nan])])))))) > 3):
@@ -90,7 +91,7 @@ def detect_anoms(data, k=0.49, alpha=0.05, num_obs_per_period=None,
 
     ## Define values and vectors.
     n = len(data.timestamp)
-    R_idx = range(max_outliers)
+    R_idx = list(range(max_outliers))
 
     num_anoms = 0
 

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from collections import namedtuple
-from date_utils import format_timestamp, get_gran, date_format, datetimes_from_ts
-from detect_anoms import detect_anoms
+from .date_utils import format_timestamp, get_gran, date_format, datetimes_from_ts
+from .detect_anoms import detect_anoms
 from math import ceil
 from pandas import DataFrame
 from pandas.lib import Timestamp
@@ -9,6 +9,10 @@ import datetime
 import numpy as np
 
 Direction = namedtuple('Direction', ['one_tail', 'upper_tail'])
+
+import sys
+if (sys.version_info > (3, 0)):
+    basestring = str
 
 def detect_ts(df, max_anoms=0.10, direction='pos',
               alpha=0.05, only_last=None, threshold=None,
@@ -91,8 +95,8 @@ def detect_ts(df, max_anoms=0.10, direction='pos',
         length = len(df.value)
         raise ValueError(
             ("max_anoms must be less than 50% of "
-             "the data points (max_anoms =%f data_points =%s).")
-                         % (round(max_anoms * length, 0), length))
+             "the data points (max_anoms ={:f} data_points ={!s}).")
+                         .format(round(max_anoms * length, 0), length))
 
     if not direction in ['pos', 'neg', 'both']:
         raise ValueError("direction options are: pos | neg | both.")

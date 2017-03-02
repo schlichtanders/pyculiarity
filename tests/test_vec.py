@@ -9,7 +9,8 @@ class TestVec(TestCase):
         self.path = os.path.dirname(os.path.realpath(__file__))
         self.raw_data = pd.read_csv(os.path.join(self.path,
                                                  'raw_data.csv'),
-                                    usecols=['timestamp', 'count'])
+                                    usecols=['timestamp', 'count'], parse_dates=['timestamp'])
+        print(self.raw_data)
 
     def test_both_directions_with_plot(self):
         results = detect_vec(self.raw_data.iloc[:,1], max_anoms=0.02,
